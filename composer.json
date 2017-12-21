@@ -1,10 +1,10 @@
 {
-    "name": "rocket-code/shopify",
+    "name": "mattquest/shopify",
     "description": "",
     "authors": [
         {
-            "name": "Rocket Code",
-            "email": "josh@rocketcode.io"
+            "name": "Matt",
+            "email": "matt@coveted.systems"
         }
     ],
     "require": {
