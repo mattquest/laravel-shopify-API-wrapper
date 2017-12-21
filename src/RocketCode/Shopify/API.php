@@ -66,12 +66,21 @@ class API
 		if(array_key_exists('code', $da)){
 			$queryArr[] = 'code' => $da['code'];
 		}
-		
 		if (array_key_exists('hmac', $da))
 		{
 			// HMAC Validation
-			$queryString = http_build_query($queryArr);
 			$match = $da['hmac'];
+			unset($da['hmac']);
+			$queryStrings = [];
+			foreach($da as $k => $v){
+				$k = str_replace('&', '%26', $k);
+				$k = str_replace('%', '%25', $k);
+				$k = str_replace('=', '%3D', $k);
+				$v = str_replace('&', '%26', $v);
+				$v = str_replace('%', '%25', $v);
+				$queryStrings[] = "$k=$v";
+			}
+			$queryString = implode('&', $queryStrings);
 			$calculated = hash_hmac('sha256', $queryString, $this->_API['API_SECRET']);
 		}
 		else
